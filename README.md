@@ -26,12 +26,12 @@ GGTATTCAAATCTACCAGGG  chr1:220936298-220936317-exon04 43526 32
 
 For each replicate scored using this script you will have six output files:
 ```
-	Name_SLIDER_EnrichedGenes_ActiveGuides.csv
-	Name_SLIDER_DepletedGenes_ActiveGuides.csv
-	Name_SLIDER_NeutralGenes_NeutralGuides.csv 
-	Name_SLIDER_sgRNA_scores_categorization.csv
-	Name_SLIDER_GeneScores.csv
-	Name_SLIDER_plots.pdf
+  Name_SLIDER_EnrichedGenes_ActiveGuides.csv
+  Name_SLIDER_DepletedGenes_ActiveGuides.csv
+  Name_SLIDER_NeutralGenes_NeutralGuides.csv 
+  Name_SLIDER_sgRNA_scores_categorization.csv
+  Name_SLIDER_GeneScores.csv
+  Name_SLIDER_plots.pdf
 ```
 	
 If you have multiple replicates, first score each replicate using this command line script. Then open R or Rstudio, import the Name_SLIDER_GeneScores.csv output files generated for each of your replicates, and combine the GeneName and Zequiv columns from each output into a single dataframe using the merge function as follows:
