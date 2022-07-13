@@ -1,4 +1,4 @@
-#!/usr/bin/env SLIDER_score.R
+#!/usr/bin/env SLIDER_ScoreReplicates.R
 #!/usr/local/bin/ Rscript
 
 args = commandArgs(trailingOnly = TRUE)
