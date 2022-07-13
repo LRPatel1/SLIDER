@@ -1,5 +1,4 @@
-# SLIDER 
-# (Scoring Soriting Screens with Laplace and Differential Rank)
+# SLIDER (Scoring Sorting Screens with Laplace and Differential Rank)
 from Lalit Patel
 
 SLIDER identifies genes that are enriched or depleted in CRISPR screens that use fluorescence activated cell sorting (FACS).
