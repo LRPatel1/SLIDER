@@ -1,8 +1,7 @@
-# SLIDER
-Scoring Soriting Screens with Laplace and Differential Rank
+# SLIDER (Scoring Soriting Screens with Laplace and Differential Rank)
+from Lalit Patel
 
 SLIDER identifies genes that are enriched or depleted in CRISPR screens using fluorescence activated cell sorting (FACS).
-
 
 Command Line:
   Rscript SLIDER_ScoreReplicates.R [Unsorted.cts] [Sorted.cts] [Name_Your_Replicate]
@@ -20,6 +19,30 @@ GCGAACACCCGAGATCTCAG  chr4:164775208-164775227-exon03 43525 222
 ATGGAGATGAGCACGAGGCG  chr1:220928344-220928363-exon02 43526 41
 GAGCGGGCAGTAGTCTGGGT  chr1:220936259-220936278-exon04 43526 718
 GGTATTCAAATCTACCAGGG  chr1:220936298-220936317-exon04 43526 32
+
+For each replicate scored using this script you will have three output files:
+	Name_SLIDER_sgRNA_scores_categorization.csv
+	Name_SLIDER_GeneScores.csv
+	Name_SLIDER_plots.pdf
+
+If you have multiple replicates, first score each replicate using this command line script. Then open R or Rstudio, import the Name_SLIDER_GeneScores.csv output files generated for each of your replicates, and combine the GeneName and Zequiv columns from each output into a single dataframe using the merge function as follows:
+	df_list <-list(Rep1_SLIDER_GeneScores[,c(2,8)],Rep2_SLIDER_GeneScores[,c(2,8)],…,RepN_SLIDER_GeneScores[,c(2,8)])
+	dfmerged<-Reduce(function(x, y) merge(x, y, by=’GeneName’, all=TRUE), df_list)
+
+Once you have a merged dataframe with Zequivs from your replicates, use colnames() to rename the columns of dfmerged to match the name of your replicates and store the number of replicates in the variable N:
+	colnames(dfmerged)<-c(‘GeneName’,’Rep1’,’Rep2’,…’RepN’)
+	N <- # of replicates
+
+Calculate gene statistics across your replicates for a screen level score, pvalue, and FDR:
+	dfmerged$Ns<- rowSums(!is.na(dfmerged[, c(2:(N+1))]))
+  dfmerged$Zs = rowSums(dfmerged[,c(2:(N+1))],na.rm=TRUE) / sqrt(dfmerged$Ns)
+	dfmerged$pvalue = 2*pnorm(q=abs(dfmerged$Zs), lower.tail=FALSE)
+	dfmerged$FDR = p.adjust(dfmerged$pvalue, method = 'BH')
+	Summary<-(dfmerged[order(-dfmerged$Zs),])
+	View(Summary)
+	write.csv(x=Summary, “ScreenSummary.csv”) 
+
+
 
 
 
