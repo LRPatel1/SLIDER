@@ -1,14 +1,15 @@
-# SLIDER (Scoring Soriting Screens with Laplace and Differential Rank)
+# SLIDER 
+# (Scoring Soriting Screens with Laplace and Differential Rank)
 from Lalit Patel
 
-SLIDER identifies genes that are enriched or depleted in CRISPR screens using fluorescence activated cell sorting (FACS).
+SLIDER identifies genes that are enriched or depleted in CRISPR screens that use fluorescence activated cell sorting (FACS).
 
 Command Line:
 ```
   Rscript SLIDER_ScoreReplicates.R [Unsorted.cts] [Sorted.cts] [Name_Your_Replicate]
 ```
 
-Input files (unsorted.cts, sorted.cts) have no header and four columns tab separated columns: sgRNA, additional_info, HUGO_GeneSymbol, counts. In the example below, the additional_info column indicates chromosomal position of sgRNA target site. You can also use additional info to indicate which guide pool (for split pool libraries), whether the guides are targeting vs non-targeting, or anything else. If you have no additional information for your sgRNA, fill column 2 with ‘NA’. 
+Input files (unsorted.cts, sorted.cts) have no header and four columns tab separated columns: sgRNA, additional_info, HUGO_GeneSymbol, counts. In the example below, the additional_info column indicates chromosomal position of sgRNA target site. You can also use additional info to indicate which guide pool (for split pool libraries), whether the guides are targeting vs non-targeting, or anything else. If you have no additional information for your sgRNA, fill column 2 with ‘NA’. For screens of a tiling library (i.e. enhancer mapping), assign bins every 5-6 sgRNA and list bin# in column 3 instead of gene symbol.
 
 Example format of .cts file:
 ```
