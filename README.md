@@ -37,7 +37,7 @@ Once you have a merged dataframe with Zequivs from your replicates, use colnames
 
 Calculate gene statistics across your replicates for a screen level score, pvalue, and FDR:
 	dfmerged$Ns<- rowSums(!is.na(dfmerged[, c(2:(N+1))]))
-  dfmerged$Zs = rowSums(dfmerged[,c(2:(N+1))],na.rm=TRUE) / sqrt(dfmerged$Ns)
+  	dfmerged$Zs = rowSums(dfmerged[,c(2:(N+1))],na.rm=TRUE) / sqrt(dfmerged$Ns)
 	dfmerged$pvalue = 2*pnorm(q=abs(dfmerged$Zs), lower.tail=FALSE)
 	dfmerged$FDR = p.adjust(dfmerged$pvalue, method = 'BH')
 	Summary<-(dfmerged[order(-dfmerged$Zs),])
